@@ -23,22 +23,22 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 
 /* Rotas da aplicação*/
-const userRouter = require("./routes/user");
-app.use("/user", userRouter);
+const userRoute = require("./routes/user");
+app.use("/user", userRoute);
 
-const assessmentRouter = require("./routes/assessment");
-app.use("/assessment", assessmentRouter);
+const assessmentRoute = require("./routes/assessment");
+app.use("/assessment", assessmentRoute);
 
-const answerRouter = require("./routes/answer");
-app.use("/answer", answerRouter);
+// const answerRoute = require("./routes/answer");
+// app.use("/answer", answerRoute);
 
-const criterionRouter = require("./routes/criterion");
-app.use("/criterion", criterionRouter);
+const criterionRoute = require("./routes/criterion");
+app.use("/criterion", criterionRoute);
 
-const glossaryRouter = require("./routes/glossary");
-app.use("/glossary", glossaryRouter);
+const glossaryRoute = require("./routes/glossary");
+app.use("/glossary", glossaryRoute);
 
-const questionRouter = require("./routes/question");
-app.use("/question", questionRouter);
+const questionRoute = require("./routes/question");
+app.use("/question", questionRoute);
 
 module.exports = app;
