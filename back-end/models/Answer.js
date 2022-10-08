@@ -16,7 +16,7 @@ const schema = mongoose.Schema({
     answer: {
         type: String,
         required: true,
-        enum: ['Y', 'N', 'X', 'P']
+        // enum: ['Y', 'N', 'X', 'P']
     },
     comment: {
         type: String,

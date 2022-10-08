@@ -26,8 +26,12 @@ const schema = mongoose.Schema({
     finished_at: {
         type: Date
     },
+    // answers: [{
+    //     type: mongoose.ObjectId,
+    //     ref: 'Answer'
+    // }]
     answers: [{
-        type: mongoose.ObjectId,
+        type: Object,
         ref: 'Answer'
     }]
 })

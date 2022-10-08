@@ -19,7 +19,7 @@ controller.retrieveAll = async (req, res) => {
     // find() sem parâmetros retorna todos os documentos da coleção
     const result = await Question.find()
       .populate("criterion")
-      .populate("glossary");
+      // .populate("glossary");
     // HTTP 200: OK (implícito)
     res.send(result);
   } catch (error) {

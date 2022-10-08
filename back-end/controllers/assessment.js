@@ -154,22 +154,6 @@ controller.retrieveOneAnswer = async (req, res) => {
   }
 };
 
-/**
- * controller.update = async (req, res) => {
-    try {
-        const result = await Assessment.findByIdAndUpdate(req.params.id, req.body)
-        // HTTP 204: No content
-        if(result) return res.status(204).end() // Encontrou e atualizou
-        else res.status(404).end()      // Não encontrou
-    }
-    catch(error) {
-        console.error(error)
-        // HTTP 500: Internal Server Error
-        res.status(500).send(error)
-    }
-}
- */
-
 controller.updateAnswer = async (req, res) => {
   try {
     const result = await Assessment.findByIdAndUpdate(
@@ -187,5 +171,37 @@ controller.updateAnswer = async (req, res) => {
     res.status(500).send(error);
   }
 };
+
+/**
+ * 
+controller.delete = async (req, res) => {
+  try {
+    const result = await Assessment.findByIdAndDelete(req.params.id);
+
+    // HTTP 204: No content
+    if (result) res.status(204).end(); // Encontrou e excluiu
+    else res.status(404).end(); // Não encontrou
+  } catch (error) {
+    console.error(error);
+    // HTTP 500: Internal Server Error
+    res.status(500).send(error);
+  }
+}; */
+controller.deleteAnswer = async (req, res) => {
+    try {
+      const result = await Assessment.findByIdAndDelete(
+        req.params.assessment.id,
+      ).populate({ path: "answers", populate: { path: "question" } });
+  
+      // HTTP 200: OK (implícito)
+      if (result) res.status(204).end();
+      // HTTP 404: Not Found
+      else res.status(404).end();
+    } catch (error) {
+      console.error(error);
+      // HTTP 500: Internal Server Error
+      res.status(500).send(error);
+    }
+  };
 
 module.exports = controller;
