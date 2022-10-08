@@ -123,8 +123,9 @@ controller.createAnswer = async (req, res) => {
 controller.retrieveAllAnswers = async (req, res) => {
   try {
     const assessment = await Assessment.findById(
-      req.params.assessment.id,
-    ).populate({ path: "answers", populate: { path: "question" } });
+      req.params.assessment_id,
+    )
+    // .populate({ path: "answers", populate: { path: "question" } });
 
     // HTTP 200: OK (implícito)
     if (assessment) res.send(assessment.answers);
@@ -188,20 +189,20 @@ controller.delete = async (req, res) => {
   }
 }; */
 controller.deleteAnswer = async (req, res) => {
-    try {
-      const result = await Assessment.findByIdAndDelete(
-        req.params.assessment.id,
-      ).populate({ path: "answers", populate: { path: "question" } });
-  
-      // HTTP 200: OK (implícito)
-      if (result) res.status(204).end();
-      // HTTP 404: Not Found
-      else res.status(404).end();
-    } catch (error) {
-      console.error(error);
-      // HTTP 500: Internal Server Error
-      res.status(500).send(error);
-    }
-  };
+  try {
+    const result = await Assessment.findByIdAndDelete(
+      req.params.assessment.id,
+    ).populate({ path: "answers", populate: { path: "question" } });
+
+    // HTTP 200: OK (implícito)
+    if (result) res.status(204).end();
+    // HTTP 404: Not Found
+    else res.status(404).end();
+  } catch (error) {
+    console.error(error);
+    // HTTP 500: Internal Server Error
+    res.status(500).send(error);
+  }
+};
 
 module.exports = controller;
