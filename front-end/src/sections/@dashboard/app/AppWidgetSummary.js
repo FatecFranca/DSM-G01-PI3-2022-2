@@ -13,7 +13,7 @@ import Iconify from '../../../components/iconify';
 
 function LinearProgressWithLabel(props) {
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+    <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
       <Box sx={{ width: '100%', mr: 1 }}>
         <LinearProgress variant="determinate" {...props} />
       </Box>
@@ -67,7 +67,7 @@ function CardContente(props) {
     case 'linear':
       return (<LinearProgressWithLabel value={props.percent} variant='determinate' />)
     case 'round':
-     return (<CircularProgressWithLabel value={props.percent} testD={props.testD} testW={props.testW} value={100/(props.total/props.testW)} />)
+     return (<CircularProgressWithLabel testD={props.testD} testW={props.testW} value={100/(props.total/props.testW)} />)
     default:
       break;
   }}
