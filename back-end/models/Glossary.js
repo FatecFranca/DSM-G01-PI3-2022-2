@@ -4,12 +4,12 @@ const schema = mongoose.Schema({
   entry: {
     type: String,
     required: true,
+    index: true,
   },
   description: {
     type: String,
     required: true,
   },
-  
 });
 
 /*

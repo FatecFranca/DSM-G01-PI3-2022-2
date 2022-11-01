@@ -47,6 +47,7 @@ controller.retrieveOne = async (req, res) => {
 controller.update = async (req, res) => {
   try {
     const result = await Assessment.findByIdAndUpdate(req.params.id, req.body);
+
     // HTTP 204: No content
     if (result) return res.status(204).end(); // Encontrou e atualizou
     else res.status(404).end(); // Não encontrou
@@ -87,8 +88,9 @@ controller.createAnswer = async (req, res) => {
         // 2.1) Verifica se uma resposta para a pergunta
         // especificada já existe no vetor
         const idx = assessment.answers.findIndex(
-          (a) => a.question === req.body.question,
+          (a) => a.question.toString() === req.body.question,
         );
+        console.log({ idx });
         if (idx >= 0) {
           // Já existe uma resposta para a pergunta no vetor "answers"
           assessment.answers[idx] = req.body;
@@ -98,7 +100,8 @@ controller.createAnswer = async (req, res) => {
         }
       } else {
         // Cria o vetor "answers" com o primeiro elemento
-        assessment.answers = [req.body];
+        assessment.answers = [];
+        assessment.answers.push(req.body.id);
       }
 
       // Atualiza assessment
@@ -124,8 +127,7 @@ controller.retrieveAllAnswers = async (req, res) => {
   try {
     const assessment = await Assessment.findById(
       req.params.assessment_id,
-    )
-    // .populate({ path: "answers", populate: { path: "question" } });
+    ).populate({ path: "answers", populate: { path: "question" } });
 
     // HTTP 200: OK (implícito)
     if (assessment) res.send(assessment.answers);
@@ -140,14 +142,18 @@ controller.retrieveAllAnswers = async (req, res) => {
 
 controller.retrieveOneAnswer = async (req, res) => {
   try {
-    const assessment = await Assessment.findById(
-      req.params.assessment.id,
-    ).populate({ path: "answers", populate: { path: "question" } });
-
-    // HTTP 200: OK (implícito)
-    if (assessment) res.send(assessment.answers);
-    // HTTP 404: Not Found
-    else res.status(404).end();
+    const assessment = await Assessment.findById(req.params.assessment_id);
+    if (assessment) {
+      const result = assessment.answers.id(req.params.id);
+      if (result) {
+        res.send(result);
+      } else {
+        res.status(404).end();
+      }
+    } else {
+      // HTTP 404: Not Found
+      res.status(404).end();
+    }
   } catch (error) {
     console.error(error);
     // HTTP 500: Internal Server Error
@@ -157,15 +163,21 @@ controller.retrieveOneAnswer = async (req, res) => {
 
 controller.updateAnswer = async (req, res) => {
   try {
-    const result = await Assessment.findByIdAndUpdate(
-      req.params.assessment.id,
-      req.body,
-    ).populate({ path: "answers", populate: { path: "question" } });
+    const assessment = await Assessment.findById(req.params.assessment_id);
+    if (assessment && assessment.answers.id(req.params.id)) {
+      // Atualiza os campos da resposta
+      assessment.answers.id(req.params.id).question = req.body.question;
+      assessment.answers.id(req.params.id).answer = req.body.answer;
+      assessment.answers.id(req.params.id).comment = req.body.comment;
+      assessment.answers.id(req.params.id).answered_at = req.body.answered_at;
 
-    // HTTP 200: OK (implícito)
-    if (result) return res.send(204).end();
-    // HTTP 404: Not Found
-    else res.status(404).end();
+      // Marca o campo "answers" como modificado
+      assessment.markModified("answers");
+
+      await assessment.save();
+
+      res.status(204).end();
+    } else res.status(404).end();
   } catch (error) {
     console.error(error);
     // HTTP 500: Internal Server Error
@@ -173,31 +185,17 @@ controller.updateAnswer = async (req, res) => {
   }
 };
 
-/**
- * 
-controller.delete = async (req, res) => {
-  try {
-    const result = await Assessment.findByIdAndDelete(req.params.id);
-
-    // HTTP 204: No content
-    if (result) res.status(204).end(); // Encontrou e excluiu
-    else res.status(404).end(); // Não encontrou
-  } catch (error) {
-    console.error(error);
-    // HTTP 500: Internal Server Error
-    res.status(500).send(error);
-  }
-}; */
 controller.deleteAnswer = async (req, res) => {
   try {
-    const result = await Assessment.findByIdAndDelete(
-      req.params.assessment.id,
-    ).populate({ path: "answers", populate: { path: "question" } });
+    const assessment = await Assessment.findById(req.params.assessment_id);
+    if (assessment && assessment.answers.id(req.params.id)) {
+      // Exclui o subdocumento relativo a resposta
+      assessment.answers.id(req.params.id).remove();
 
-    // HTTP 200: OK (implícito)
-    if (result) res.status(204).end();
-    // HTTP 404: Not Found
-    else res.status(404).end();
+      await assessment.save();
+
+      res.status(204).end();
+    } else res.status(404).end();
   } catch (error) {
     console.error(error);
     // HTTP 500: Internal Server Error

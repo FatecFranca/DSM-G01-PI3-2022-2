@@ -5,11 +5,12 @@ const schema = mongoose.Schema({
   criterion: {
     type: mongoose.ObjectId, // Tipo especial
     ref: "Criterion", // Coleção referenciada
-    required: true,
+    index: true,
   },
   order: {
     type: Number,
-    required: true
+    required: true,
+    index: true,
   },
   enunciation: {
     type: String,

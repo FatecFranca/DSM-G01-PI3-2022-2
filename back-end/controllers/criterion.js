@@ -17,7 +17,7 @@ controller.create = async (req, res) => {
 controller.retrieveAll = async (req, res) => {
   try {
     // find() sem parâmetros retorna todos os documentos da coleção
-    const result = await Criterion.find();
+    const result = await Criterion.find().sort({ order: 1 });
     // HTTP 200: OK (implícito)
     res.send(result);
   } catch (error) {

@@ -16,15 +16,22 @@ controller.create = async (req, res) => {
 
 controller.retrieveAll = async (req, res) => {
   try {
-    // find() sem parâmetros retorna todos os documentos da coleção
-    const result = await Question.find()
-      .populate("criterion")
-      // .populate("glossary");
-    // HTTP 200: OK (implícito)
-    res.send(result);
+    let result;
+    // Se existir "crieterion" na queryString
+    if (req.query.criterion) {
+      // Retorna só as questões de um determinado critério ordenadas pelo campo order
+      result = await Question.find({ criterion: req.query.criterion })
+        .populate("criterion")
+        .populate("glossary_refs")
+        .sort({ order: 1 });
+    } else {
+      // Retorna todas as questões, na ordem natural
+      result = await Question.find()
+        .populate("criterion")
+        .populate("glossary_refs");
+    }
   } catch (error) {
     console.error(error);
-    // HTTP 500: Internal Server Error
     res.status(500).send(error);
   }
 };
