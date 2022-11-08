@@ -21,6 +21,12 @@ const navConfig = [
     path: '/dashboard/products',
     icon: icon('ic_document'),
   },
+  {
+    title: 'Questionario',
+    path: '/dashboard/products',
+    icon: icon('ic_document'),
+  },
+  
   
 ];
 
