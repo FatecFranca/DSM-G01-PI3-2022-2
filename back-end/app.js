@@ -5,10 +5,13 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const cors = require("cors");
 
 const indexRouter = require("./routes/index");
 
 const app = express();
+
+app.use(cors());
 
 // Conexão ao banco de dados remoto
 const connectDb = require("./config/database");
