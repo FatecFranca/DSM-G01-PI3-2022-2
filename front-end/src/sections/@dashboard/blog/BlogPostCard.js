@@ -104,19 +104,7 @@ export default function BlogPostCard({ post, index }) {
               ...((latestPostLarge || latestPost) && { display: 'none' }),
             }}
           />
-          <StyledAvatar
-            alt={author.name}
-            src={author.avatarUrl}
-            sx={{
-              ...((latestPostLarge || latestPost) && {
-                zIndex: 9,
-                top: 24,
-                left: 24,
-                width: 40,
-                height: 40,
-              }),
-            }}
-          />
+          
 
           <StyledCover alt={title} src={cover} />
         </StyledCardMedia>
@@ -131,9 +119,7 @@ export default function BlogPostCard({ post, index }) {
             }),
           }}
         >
-          <Typography gutterBottom variant="caption" sx={{ color: 'text.disabled', display: 'block' }}>
-            {fDate(createdAt)}
-          </Typography>
+          
 
           <StyledTitle
             color="inherit"
@@ -149,24 +135,12 @@ export default function BlogPostCard({ post, index }) {
             {title}
           </StyledTitle>
 
-          <StyledInfo>
-            {POST_INFO.map((info, index) => (
-              <Box
-                key={index}
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  ml: index === 0 ? 0 : 1.5,
-                  ...((latestPostLarge || latestPost) && {
-                    color: 'grey.500',
-                  }),
-                }}
-              >
-                <Iconify icon={info.icon} sx={{ width: 16, height: 16, mr: 0.5 }} />
-                <Typography variant="caption">{fShortenNumber(info.number)}</Typography>
-              </Box>
-            ))}
-          </StyledInfo>
+          <Typography gutterBottom variant="caption" sx={{ color: 'text.disabled', display: 'block' }}>
+            {createdAt}
+          </Typography>
+
+         
+          
         </CardContent>
       </Card>
     </Grid>

@@ -26,7 +26,11 @@ const navConfig = [
     path: '/dashboard/products',
     icon: icon('ic_document'),
   },
-  
+  {
+    title: 'Glossário',
+    path: '/dashboard/glossary',
+    icon: icon('ic_document'),
+  },
   
 ];
 
