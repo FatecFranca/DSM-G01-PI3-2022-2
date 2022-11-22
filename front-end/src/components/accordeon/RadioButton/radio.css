@@ -1,0 +1,16 @@
+.contain{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
+
+.radio{
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+}
+
+.span{
+    margin-top: 10px;
+    font-size: 1rem;
+}

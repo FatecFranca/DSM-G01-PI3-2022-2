@@ -23,7 +23,7 @@ const navConfig = [
   },
   {
     title: 'Questionario',
-    path: '/dashboard/products',
+    path: '/dashboard/question',
     icon: icon('ic_document'),
   },
   {
