@@ -24,6 +24,7 @@ export default function Router() {
         { path: 'user', element: <UserPage /> },
         { path: 'products', element: <ProductsPage /> },
         { path: 'glossary', element: <BlogPage /> },
+        { path: 'question', element: <QuestionPage /> }
       ],
     },
     {
