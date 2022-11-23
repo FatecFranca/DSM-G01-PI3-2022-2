@@ -23,10 +23,14 @@ const navConfig = [
   },
   {
     title: 'Questionario',
-    path: '/dashboard/products',
+    path: '/dashboard/question',
     icon: icon('ic_document'),
   },
-  
+  {
+    title: 'Glossário',
+    path: '/dashboard/glossary',
+    icon: icon('ic_document'),
+  },
   
 ];
 
