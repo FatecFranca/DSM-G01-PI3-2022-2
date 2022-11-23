@@ -148,7 +148,7 @@ export default function UserPage() {
 
   const isNotFound = !filteredUsers.length && !!filterName;
 
-  fetch(`${process.env.API_URL}/assessment`)
+  fetch(`https://throbbing-rain-5197.fly.dev/assessment`)
 .then((res) => res.json())
 .then((data) => {
   data.forEach((element, index) => {
