@@ -30,6 +30,8 @@ controller.retrieveAll = async (req, res) => {
         .populate("criterion")
         .populate("glossary_refs");
     }
+
+    res.send(result);
   } catch (error) {
     console.error(error);
     res.status(500).send(error);
