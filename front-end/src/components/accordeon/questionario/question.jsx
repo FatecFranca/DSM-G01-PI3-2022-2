@@ -10,7 +10,6 @@ import { Typography } from '@mui/material';
 import Rad from "../RadioButton";
 
 
-
 export default function InputAdm({ title, body, question }) {
   const [buttonVisible, setButtonVisible] = useState(false);
 
@@ -30,30 +29,40 @@ export default function InputAdm({ title, body, question }) {
           startIcon={<ApartmentIcon />}
           sx={{
             width: '100%',
-            height: '100px',
+            height: '150px',
             bgcolor: '#ddf4ff',
             color: '#333',
             borderRadius: '5px',
             border: '1px solid #aaa9a9',
             textAlign: 'center',
             display: 'flex',
+            flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
             marginTop: '-16px',
           }}
         >
-          <div>
-            <Typography variant="h5" component="div" >
-              {question}
-            </Typography>
+          <div className='boxQuestion'>
+            <div>
+              <Typography variant="h5" component="div" >
+                {question}
+              </Typography>
+            </div>
+            <div>
+              <Rad />
+            </div>
           </div>
-          <div>
-            <Rad />
+
+          <div className='boxObserver'>
+            <div>
+              <span>Observação</span>
+            </div>
+            <input className='inputObservation' type="text" />
           </div>
 
         </Box>
       </div>
-    );
+    ); 
   };
 
   return (
