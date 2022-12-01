@@ -1,7 +1,5 @@
 .container{
     width: 100%;
-    height: 70px;
-    background-color: rgb(230, 230, 230);
     border-radius: 10px;
     
 
@@ -10,4 +8,19 @@
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
+    background-color: rgb(230, 230, 230);
+}
+
+.questions{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1.5rem;
+}
+
+.buttonSubmit{
+    margin: 1rem 1rem 1rem 0;
+    width: 180px;
+    height: 50px;
 }
