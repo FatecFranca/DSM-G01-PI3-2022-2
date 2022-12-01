@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Question from './questionario/question'
+// import { Route , Link } from 'react-router-dom'
 
 
 export default function Index(props) {
@@ -48,7 +49,7 @@ export default function Index(props) {
 
   const onSubmit = (data) => {
     console.log(data);
-    // axios.post("http://localhost:3000/assessment", data)
+    axios.post("http://localhost:3000/assessment", data)
     setDefault()
     
   };
