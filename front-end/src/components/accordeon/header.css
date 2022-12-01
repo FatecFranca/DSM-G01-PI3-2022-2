@@ -1,11 +1,13 @@
 .container{
     width: 100%;
-    height: 100px;
+    height: 70px;
     background-color: rgb(230, 230, 230);
     border-radius: 10px;
+    
 
 }
 .header{
     display: flex;
-    justify-content: center
+    justify-content: center;
+    margin-bottom: 10px;
 }

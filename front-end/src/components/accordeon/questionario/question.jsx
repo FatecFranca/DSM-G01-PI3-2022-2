@@ -7,10 +7,16 @@ import NightShelterIcon from '@mui/icons-material/NightShelter';
 import Box from '@mui/material/Box';
 import './header.css';
 import { Typography } from '@mui/material';
-import Rad from "../RadioButton";
+// import Rad from "../RadioButton";
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 
 
-export default function InputAdm({ title, body, question }) {
+
+export default function InputAdm({ title, register, question, id, position, setValue }) {
+
   const [buttonVisible, setButtonVisible] = useState(false);
 
   function handleButton() {
@@ -20,6 +26,9 @@ export default function InputAdm({ title, body, question }) {
       setButtonVisible(false);
     }
   }
+
+  setValue(`answers.[${position}].question`, id)
+  
 
   const handleButtonVisible = () => {
     return (
@@ -45,11 +54,29 @@ export default function InputAdm({ title, body, question }) {
           <div className='boxQuestion'>
             <div>
               <Typography variant="h5" component="div" >
-                {question}
+                {question }
+                
               </Typography>
             </div>
             <div>
-              <Rad />
+
+              <FormControl sx={{ width: "170px" }}>
+                <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  label="Selecione ..."
+                  {...register(`answers.[${position}].answer`)}
+                  
+                >
+                  <MenuItem value={"S"}>Selecione</MenuItem>
+                  <MenuItem value={"Y"}>Sim</MenuItem>
+                  <MenuItem value={"N"}>Não</MenuItem>
+                  <MenuItem value={"P"}>Resposta adiada</MenuItem>
+                  <MenuItem value={"X"}>Não aplicável</MenuItem>
+                </Select>
+              </FormControl>
+
             </div>
           </div>
 
@@ -57,12 +84,16 @@ export default function InputAdm({ title, body, question }) {
             <div>
               <span>Observação</span>
             </div>
-            <input className='inputObservation' type="text" />
+            <input
+               className='inputObservation' 
+               type="text"
+               {...register(`answers.[${position}].comment`)}
+               />
           </div>
 
         </Box>
       </div>
-    ); 
+    );
   };
 
   return (
@@ -85,13 +116,13 @@ export default function InputAdm({ title, body, question }) {
             textTransform: 'none',
             textAlign: 'left',
             mb: '1rem',
-            marginTop: '2rem',
           }}
         >
           {title}
         </Button>
       </div>
       {buttonVisible && handleButtonVisible()}
+
     </div>
   );
 }
