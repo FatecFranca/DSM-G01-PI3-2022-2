@@ -12,6 +12,7 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import TextField from '@mui/material/TextField';
 
 
 
@@ -28,7 +29,7 @@ export default function InputAdm({ title, register, question, id, position, setV
   }
 
   setValue(`answers.[${position}].question`, id)
-  
+
 
   const handleButtonVisible = () => {
     return (
@@ -38,8 +39,8 @@ export default function InputAdm({ title, register, question, id, position, setV
           startIcon={<ApartmentIcon />}
           sx={{
             width: '100%',
-            height: '150px',
-            bgcolor: '#ddf4ff',
+            height: '120px',
+            bgcolor: '#afc8f3',
             color: '#333',
             borderRadius: '5px',
             border: '1px solid #aaa9a9',
@@ -54,20 +55,20 @@ export default function InputAdm({ title, register, question, id, position, setV
           <div className='boxQuestion'>
             <div>
               <Typography variant="h5" component="div" >
-                {question }
-                
+                {question}
               </Typography>
             </div>
-            <div>
 
-              <FormControl sx={{ width: "170px" }}>
-                <InputLabel id="demo-simple-select-label">Age</InputLabel>
+            <div>
+              <FormControl sx={{ width: "170px", margin: "10px", bgcolor: "#fff", border: "1px solid #3ea5e5", 
+              borderRadius : "5px" }}>
+                <InputLabel id="demo-simple-select-label">Resposta</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   label="Selecione ..."
                   {...register(`answers.[${position}].answer`)}
-                  
+
                 >
                   <MenuItem value={"S"}>Selecione</MenuItem>
                   <MenuItem value={"Y"}>Sim</MenuItem>
@@ -76,18 +77,18 @@ export default function InputAdm({ title, register, question, id, position, setV
                   <MenuItem value={"X"}>Não aplicável</MenuItem>
                 </Select>
               </FormControl>
-
             </div>
           </div>
 
           <div className='boxObserver'>
-            <div>
-              <span>Observação</span>
-            </div>
-            <input
-               className='inputObservation' 
+            
+            <TextField
+               id="filled-basic" 
+               label="Observação" 
+               variant="filled"
                type="text"
-               {...register(`answers.[${position}].comment`)}
+              {...register(`answers.[${position}].comment`)}
+              sx={{ width: "500px",marginLeft: "5px",marginTop: "-25px" , bgcolor: "#fff",borderRadius: "5px" , border: "1px solid #3ea5e5",}}
                />
           </div>
 
@@ -109,10 +110,10 @@ export default function InputAdm({ title, register, question, id, position, setV
             height: '100%',
             bgcolor: '#F5F5F5',
             color: '#333',
-            fontSize: '1.5rem',
+            fontSize: '1.2rem',
             fontWeight: 'bold',
             borderRadius: '5px',
-            border: '1px solid #8f8e8e',
+            border: '1px solid #305de3',
             textTransform: 'none',
             textAlign: 'left',
             mb: '1rem',
