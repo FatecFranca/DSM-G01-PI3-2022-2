@@ -12,14 +12,9 @@ const navConfig = [
     icon: icon('ic_home'),
   },
   {
-    title: 'Iniciar teste',
+    title: 'Avaliações Realizadas',
     path: '/dashboard/user',
     icon: icon('ic_play'),
-  },
-  {
-    title: 'Projetos',
-    path: '/dashboard/products',
-    icon: icon('ic_document'),
   },
   {
     title: 'Questionario',
