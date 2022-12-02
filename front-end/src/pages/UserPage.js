@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { filter } from 'lodash';
 import { sentenceCase } from 'change-case';
+import axios from 'axios';
 import React , { useState } from 'react';
 // @mui
 import {
@@ -30,16 +31,13 @@ import Iconify from '../components/iconify';
 import Scrollbar from '../components/scrollbar';
 // sections
 import { UserListHead, UserListToolbar } from '../sections/@dashboard/user';
+
 // mock
 const USERLIST = []
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Name', alignRight: false },
-  // { id: 'company', label: 'Company', alignRight: false },
-  // { id: 'role', label: 'Role', alignRight: false },
-  // { id: 'isVerified', label: 'Verified', alignRight: false },
-  // { id: 'status', label: 'Status', alignRight: false },
   { id: '' },
 ];
 
@@ -157,6 +155,7 @@ export default function UserPage() {
         USERLIST[index] = {
           avatarUrl: `/assets/images/avatars/avatar_${1 + index}.jpg`,
           name: element.name,
+          _id: element._id,
         }
       });
       setItens(USERLIST)
@@ -175,8 +174,10 @@ export default function UserPage() {
       setIdUser(id);
     }
 
-
-
+    // function handleDelete(){
+    //   axios.delete(`http://localhost:3000/assessment/${}`)
+    // }
+    
 
   return (
     <>
@@ -216,7 +217,7 @@ export default function UserPage() {
                 />
                 <TableBody>
                   {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, name, avatarUrl } = row;
+                    const { id, name, avatarUrl, _id } = row;
                     const selectedUser = selected.indexOf(name) !== -1;
                     console.log(row)
                     return (
@@ -230,7 +231,7 @@ export default function UserPage() {
                             direction="row" 
                             alignItems="center" 
                             spacing={2} 
-                            onClick={()=> handleModalOpen(row.id)}
+                            onClick={()=> handleModalOpen(_id)}
                             sx={{ cursor: 'pointer' }}
                             >
                             <Avatar alt={name} src={avatarUrl} />
@@ -317,7 +318,7 @@ export default function UserPage() {
           Edit
         </MenuItem>
 
-        <MenuItem sx={{ color: 'error.main' }}>
+        <MenuItem sx={{ color: 'error.main' }} >
           <Iconify icon={'eva:trash-2-outline'} sx={{ mr: 2 }} />
           Delete
         </MenuItem>
