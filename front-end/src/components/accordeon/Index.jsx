@@ -8,15 +8,15 @@ import FormControl from '@mui/material/FormControl';
 import { useForm } from "react-hook-form";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { Route, Link } from 'react-router-dom'
 import Question from './questionario/question'
-// import { Route , Link } from 'react-router-dom'
 
 
 export default function Index(props) {
   const [questions, setQuestions] = useState([])
   const [nameUser, setNameUser] = useState([]);
 
-  
+
   useEffect(() => {
     axios.get("http://localhost:3000/question")
       .then(res => {
@@ -51,7 +51,7 @@ export default function Index(props) {
     console.log(data);
     axios.post("http://localhost:3000/assessment", data)
     setDefault()
-    
+    Route.push('/dashboard/user')
   };
 
 
@@ -139,7 +139,9 @@ export default function Index(props) {
         ))}
 
         <div>
-          <Button className='buttonSubmit' onClick={handleSubmit(onSubmit)} variant="contained">Salvar</Button>
+          {/* <Link to="/dashboard/user">  */}
+            <Button className='buttonSubmit' onClick={handleSubmit(onSubmit)} variant="contained">Salvar</Button>
+          {/* </Link> */}
         </div>
       </form>
     </div >
