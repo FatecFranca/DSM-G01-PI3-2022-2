@@ -25,9 +25,6 @@ export default function Index(props) {
       }).catch(err => {
         console.log(err);
       })
-
-
-
   }, [])
 
   useEffect(() => {
